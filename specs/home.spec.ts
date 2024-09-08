@@ -14,7 +14,7 @@ test.describe('Home Page validations', () => {
         await loginPage.login(email, password);
     })
 
-    test('verify after status of pages in left nav', async () => {
+    test('verify after status of pages in left nav', async ({page}) => {
         await homePage.isActiveHome();
         await homePage.isActiveProfile();
         await homePage.isActiveMeetings();
@@ -27,6 +27,7 @@ test.describe('Home Page validations', () => {
         await homePage.isActiveClip();
         await homePage.isActiveScheduler();
         await homePage.isActiveSettings();
+        await page.waitForTimeout(2000);    //for test purpose
         await homePage.isActiveDataAndPrivacy();
         await homePage.isActiveReports();
     })
