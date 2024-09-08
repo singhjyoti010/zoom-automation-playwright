@@ -37,5 +37,4 @@ export class ScheduleMeetingPage {
         await this.page.check(this.personalMeetingIdCheckBox);
         await this.saveBtn.click();
     }
-    
 }

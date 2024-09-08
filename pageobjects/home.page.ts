@@ -145,11 +145,13 @@ export class HomePage {
     }
 
     public async isActiveDataAndPrivacy() {
+        await this.leftNavElementDataAndPrivacy.scrollIntoViewIfNeeded();
         await this.leftNavElementDataAndPrivacy.click();
         await expect(this.leftNavElementDataAndPrivacy).toHaveAttribute('aria-current');
     }
 
     public async isActiveReports() {
+        await this.leftNavElementDataAndPrivacy.scrollIntoViewIfNeeded();
         await this.leftNavElementReports.click();
         await expect(this.leftNavElementReports).toHaveAttribute('aria-current');
     }
@@ -158,6 +160,4 @@ export class HomePage {
     public async clickSchduleWidget() {
         await (await this.scheduleWidget).click();
     }
-
-
 }
