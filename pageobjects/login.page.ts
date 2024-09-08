@@ -4,6 +4,10 @@ export class LoginPage {
 
     readonly page: Page;
 
+    constructor(page: Page) {
+        this.page = page
+    }
+
     /******************************** helper locators ****************************************/
 
     public get emailInputField() {
@@ -18,8 +22,12 @@ export class LoginPage {
         return this.page.locator('#js_btn_login');
     }
 
-    constructor(page: Page) {
-        this.page = page
+    public get bannerCloseButton() {
+        return this.page.locator('.banner-close-button');
+    }
+
+    public get preferenceButton() {
+        return this.page.locator('.ot-floating-button__open');
     }
 
     
@@ -36,14 +44,24 @@ export class LoginPage {
         
         //verify page title
         await expect(this.page).toHaveTitle(/Sign In/);
-        
+
+        //wait for cookies banner to appear
+        await this.bannerCloseButton.waitFor({state: "visible", timeout: 40000});
+        await this.bannerCloseButton.click();
+
         //fill email field
-        await this.emailInputField.fill(email);
+        await this.emailInputField.type(email, { delay: 100 });
 
         //fill password field
-        await this.passwordInputField.fill(password);
+        await this.passwordInputField.type(password, { delay: 100 });
+
+        //wait for preference button to appear
+        await this.preferenceButton.waitFor({state:"visible"});
 
         //click signin button
         await this.signinButton.click();
+
+        //wait for user name post login
+        await this.page.waitForSelector('//h3[contains(text(),"Emma Grace")]', { state: 'visible', timeout: 80000 });
     }
 }

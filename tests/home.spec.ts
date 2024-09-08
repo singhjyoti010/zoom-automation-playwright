@@ -1,6 +1,7 @@
 import { test } from "@playwright/test";
 import { HomePage } from "../pageobjects/home.page";
 import { LoginPage } from "../pageobjects/login.page";
+import path from "path";
 
 let homePage: HomePage;
 let loginPage: LoginPage;
@@ -70,4 +71,21 @@ test.describe('Home Page validations', () => {
         await homePage.isActiveReports();
     })
 
+    test.afterEach(async ({ page }, testInfo) => {
+        if (testInfo.status === 'failed') {
+          // Define the path where the screenshot will be saved
+          const screenshotPath = path.join('screenshots', `${testInfo.title.replace(/\s+/g, '_')}-${new Date().toISOString()}.png`);
+          
+          // Create the screenshots directory if it doesn't exist
+        //   if (!fs.existsSync('screenshots')) {
+        //     fs.mkdirSync('screenshots');
+        //   }
+          
+          // Capture and save the screenshot
+          await page.screenshot({ path: screenshotPath });
+          
+          // Optionally, you can log the path of the screenshot
+          console.log(`Screenshot saved at ${screenshotPath}`);
+        }
+    });
 })

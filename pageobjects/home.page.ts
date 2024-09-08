@@ -156,7 +156,7 @@ export class HomePage {
 
     /******************************** right section methods ****************************************/
     public async clickSchduleWidget() {
-        await this.scheduleWidget.click();
+        await (await this.scheduleWidget).click();
     }
 
 
