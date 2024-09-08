@@ -50,16 +50,22 @@ export class LoginPage {
         await this.bannerCloseButton.click();
 
         //fill email field
-        await this.emailInputField.type(email, { delay: 100 });
+        await this.emailInputField.fill(email);
 
         //fill password field
-        await this.passwordInputField.type(password, { delay: 100 });
+        await this.passwordInputField.fill(password);
 
         //wait for preference button to appear
         await this.preferenceButton.waitFor({state:"visible"});
 
         //click signin button
         await this.signinButton.click();
+        if(await this.page.isVisible('.zm-message__content', {timeout: 10000})){
+            await this.page.waitForTimeout(5000);
+            await this.signinButton.click();
+        } else{
+            await this.signinButton.click();
+        }
 
         //wait for user name post login
         await this.page.waitForSelector('//h3[contains(text(),"Emma Grace")]', { state: 'visible', timeout: 80000 });

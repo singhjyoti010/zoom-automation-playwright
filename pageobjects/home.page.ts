@@ -85,7 +85,7 @@ export class HomePage {
     /******************************** Left nav methods ***************************************/
 
     public async isActiveHome(){
-        await this.leftNavElementHome.click();
+        // await this.leftNavElementHome.click();
         await expect(this.leftNavElementHome).toHaveAttribute('aria-current');
     }
 
