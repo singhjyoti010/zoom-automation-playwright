@@ -41,7 +41,7 @@ export class LoginPage {
     public async login(email: string, password: string) {
         //go to zoom signin page
         await this.page.goto('/signin');
-        
+        await this.page.waitForLoadState();
         //verify page title
         await expect(this.page).toHaveTitle(/Sign In/);
 

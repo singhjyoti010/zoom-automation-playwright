@@ -31,12 +31,12 @@ export class ScheduleMeetingPage {
     /******************************** helper methods ****************************************/
 
     public async createMeeting(title) {
-        await this.page.pause();
         await this.scheduleMeetingBtn.click();
         await expect(this.backToMeetingsLink).toBeVisible();
         await this.meetingTitle.fill(title);
         await this.page.locator('label').filter({ hasText: 'Personal Meeting ID 460 460' }).locator('span').first().click();
         // await this.page.click(this.personalMeetingIdCheckBox);
-        await this.saveBtn.click();
+        await this.page.getByRole('button', { name: 'Save' }).click();
+        // await this.saveBtn.click();
     }
 }

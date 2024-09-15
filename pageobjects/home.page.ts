@@ -60,7 +60,7 @@ export class HomePage {
     }
 
     get leftNavElementDataAndPrivacy() {
-        return this.page.locator('[tracking-id="leftNavPrivacy"]');
+        return this.page.locator('//*[@tracking-id="leftNavPrivacy" and @tracking-category="NavPersonal"]');
     }
 
     get leftNavElementReports() {
@@ -146,14 +146,14 @@ export class HomePage {
 
     public async isActiveDataAndPrivacy() {
         await this.leftNavElementDataAndPrivacy.scrollIntoViewIfNeeded();
-        await this.leftNavElementDataAndPrivacy.click();
-        await expect(this.leftNavElementDataAndPrivacy).toHaveAttribute('aria-current');
+        await (await this.leftNavElementDataAndPrivacy).first().click();
+        await expect(this.leftNavElementDataAndPrivacy.first()).toHaveAttribute('aria-current');
     }
 
     public async isActiveReports() {
-        await this.leftNavElementDataAndPrivacy.scrollIntoViewIfNeeded();
-        await this.leftNavElementReports.click();
-        await expect(this.leftNavElementReports).toHaveAttribute('aria-current');
+        await this.leftNavElementReports.first().scrollIntoViewIfNeeded();
+        await this.leftNavElementReports.first().click();
+        await expect(this.leftNavElementReports.first()).toHaveAttribute('aria-current');
     }
 
     /******************************** right section methods ****************************************/
