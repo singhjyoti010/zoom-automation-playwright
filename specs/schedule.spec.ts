@@ -9,14 +9,15 @@ let scheduleMeeting: ScheduleMeetingPage;
 const email = process.env.USER_EMAIL!;
 const password = process.env.USER_PASSWORD!;
 
+test.beforeEach("", async ({page}) => {
+    loginPage = new LoginPage(page);
+    homePage = new HomePage(page);
+    scheduleMeeting = new ScheduleMeetingPage(page);
+    await loginPage.login(email, password);
+    await homePage.isActiveMeetings();
+})
+
 test.describe("Schedule Meeting test", () => {
-    test.beforeEach("", async ({page}) => {
-        loginPage = new LoginPage(page);
-        homePage = new HomePage(page);
-        scheduleMeeting = new ScheduleMeetingPage(page);
-        await loginPage.login(email, password);
-        await homePage.isActiveMeetings();
-    })
 
     test("verifying meeting creation", async () =>{
         await scheduleMeeting.createMeeting("Test meeting");
