@@ -56,7 +56,7 @@ export class LoginPage {
         await this.passwordInputField.fill(password);
 
         //wait for preference button to appear
-        await this.preferenceButton.waitFor({state:"visible"});
+        await this.preferenceButton.waitFor({state:"visible", timeout: 30000});
 
         //click signin button
         await this.signinButton.click();
@@ -64,7 +64,7 @@ export class LoginPage {
             await this.page.waitForTimeout(5000);
             await this.signinButton.click();
         } else{
-            await this.signinButton.click();
+            //await this.signinButton.click();
         }
 
         //wait for user name post login
