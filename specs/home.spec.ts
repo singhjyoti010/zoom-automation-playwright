@@ -1,16 +1,10 @@
 import { test } from "@playwright/test";
 import { HomePage } from "../pageobjects/home.page";
-import { LoginPage } from "../pageobjects/login.page";
 
 let homePage: HomePage;
-let loginPage: LoginPage;
-const email = process.env.USER_EMAIL!;
-const password = process.env.USER_PASSWORD!;
 
 test.beforeEach("create page context", async ({page}) => {
     homePage = new HomePage(page);
-    // loginPage = new LoginPage(page);
-    // await loginPage.login(email, password);
 })
 
 test.describe('Home Page validations', () => {
