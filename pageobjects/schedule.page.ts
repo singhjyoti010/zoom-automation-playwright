@@ -3,10 +3,18 @@ import { expect, Locator, type Page } from "@playwright/test";
 export class ScheduleMeetingPage {
     readonly page: Page;
     readonly scheduleMeetingNotBtn: Locator;
+    readonly meetingDetail: Locator;
+    readonly deleteMeetingBtn: Locator;
+    readonly confirmDelete: Locator;
 
     constructor(page){
         this.page = page;
         this.scheduleMeetingNotBtn = this.page.locator('//*[contains(text(), "Schedule a Meeting")]/parent::a');
+        //delete meeting locators
+        this.meetingDetail = this.page.locator('.has-detail').first();
+        this.deleteMeetingBtn = this.page.locator('.meeting-delete').first();
+        // this.confirmDelete = this.page.locator("//*[contains(text(),'Delete')]//parent::button[contains(@class,'meeting-delete')]");
+        this.confirmDelete = this.page.getByRole('button', { name: 'Delete', exact: true });
     }
 
     get scheduleMeetingBtn() {
@@ -44,5 +52,20 @@ export class ScheduleMeetingPage {
         // await this.page.click(this.personalMeetingIdCheckBox);
         await this.page.getByRole('button', { name: 'Save' }).click();
         // await this.saveBtn.click();
+    }
+
+    public async deleteMeeting() {
+        try{
+            await expect(this.scheduleMeetingNotBtn).toBeVisible();
+            await this.meetingDetail.hover();
+            // await this.page.on('dialog', async (dialog)=>{
+            //     await dialog.accept();
+            // })
+            await this.deleteMeetingBtn.click();
+            await this.confirmDelete.click();
+        }
+        catch(e) {
+            console.log("no meeting to delete", e);
+        }
     }
 }
