@@ -11,9 +11,10 @@ const password = process.env.USER_PASSWORD!;
 
 test.beforeEach("", async ({page}) => {
     // loginPage = new LoginPage(page);
-    // homePage = new HomePage(page);
+    homePage = new HomePage(page);
     scheduleMeeting = new ScheduleMeetingPage(page);
     // await loginPage.login(email, password);
+    await page.goto('https://us05web.zoom.us/myhome');
     await homePage.isActiveMeetings();
 })
 
