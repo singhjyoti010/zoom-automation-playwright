@@ -1,10 +1,12 @@
-import { expect, type Page } from "@playwright/test";
+import { expect, Locator, type Page } from "@playwright/test";
 
 export class ScheduleMeetingPage {
     readonly page: Page;
+    readonly scheduleMeetingNotBtn: Locator;
 
     constructor(page){
         this.page = page;
+        this.scheduleMeetingNotBtn = this.page.locator('//*[contains(text(), "Schedule a Meeting")]/parent::a');
     }
 
     get scheduleMeetingBtn() {
@@ -31,7 +33,11 @@ export class ScheduleMeetingPage {
     /******************************** helper methods ****************************************/
 
     public async createMeeting(title) {
-        await this.scheduleMeetingBtn.click();
+        if(await this.scheduleMeetingNotBtn.isVisible()){
+            await this.scheduleMeetingNotBtn.click();
+        } else {
+            await this.scheduleMeetingBtn.click();
+        }
         await expect(this.backToMeetingsLink).toBeVisible();
         await this.meetingTitle.fill(title);
         await this.page.locator('label').filter({ hasText: 'Personal Meeting ID 460 460' }).locator('span').first().click();
