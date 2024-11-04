@@ -33,7 +33,7 @@ export class ScheduleMeetingPage {
     /******************************** helper methods ****************************************/
 
     public async createMeeting(title) {
-        if(await this.scheduleMeetingNotBtn.isVisible()){
+        if(await this.scheduleMeetingNotBtn.isVisible({timeout: 10000})){
             await this.scheduleMeetingNotBtn.click();
         } else {
             await this.scheduleMeetingBtn.click();
