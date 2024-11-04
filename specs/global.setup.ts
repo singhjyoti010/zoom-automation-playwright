@@ -6,6 +6,7 @@ const email = process.env.USER_EMAIL!;
 const password = process.env.USER_PASSWORD!;
 
 setup('login setup', async ({page }) => {
+    await page.context().clearCookies();
     console.log('logging in...');
     loginPage = new LoginPage(page);
     await loginPage.login(email, password);

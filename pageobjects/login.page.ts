@@ -51,7 +51,7 @@ export class LoginPage {
 
     public async login(email: string, password: string) {
         //go to zoom signin page
-        await this.page.goto('/signin', { waitUntil: 'networkidle' });
+        await this.page.goto('https://zoom.us/signin');
         await this.page.waitForLoadState();
         await this.page.waitForTimeout(5000);
         //verify page title

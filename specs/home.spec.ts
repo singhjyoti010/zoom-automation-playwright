@@ -9,13 +9,16 @@ const password = process.env.USER_PASSWORD!;
 
 test.beforeEach("create page context", async ({page}) => {
     homePage = new HomePage(page);
-    loginPage = new LoginPage(page);
-    await loginPage.login(email, password);
+    // loginPage = new LoginPage(page);
+    // await loginPage.login(email, password);
 })
 
 test.describe('Home Page validations', () => {
 
     test('verify after status of pages in left nav', async ({page}) => {
+        // await page.goto('https://zoom.us/myhome')
+        await page.goto('https://us05web.zoom.us/myhome');
+        await page.waitForLoadState();
         await homePage.isActiveHome();
         await homePage.isActiveProfile();
         await homePage.isActiveMeetings();

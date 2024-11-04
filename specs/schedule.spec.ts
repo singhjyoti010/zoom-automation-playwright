@@ -10,10 +10,10 @@ const email = process.env.USER_EMAIL!;
 const password = process.env.USER_PASSWORD!;
 
 test.beforeEach("", async ({page}) => {
-    loginPage = new LoginPage(page);
-    homePage = new HomePage(page);
+    // loginPage = new LoginPage(page);
+    // homePage = new HomePage(page);
     scheduleMeeting = new ScheduleMeetingPage(page);
-    await loginPage.login(email, password);
+    // await loginPage.login(email, password);
     await homePage.isActiveMeetings();
 })
 

@@ -7,6 +7,7 @@ let loginPage: LoginPage;
 
 test.describe("Zoom signin", () => {
     test('login', async ({ page }) => {
+        await page.context().clearCookies();
         loginPage = new LoginPage(page);
         await loginPage.login(email, password);
     })

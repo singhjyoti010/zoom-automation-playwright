@@ -13,6 +13,7 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
+  // globalSetup: path.resolve('specs/global.setup.ts'),
   timeout: 60000,
   testDir: './specs',
   /* Run tests in files in parallel */
@@ -21,7 +22,7 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
   // retries: process.env.CI ? 2 : 0,
-  retries: 2,
+  retries: 1,
   /* Opt out of parallel tests on CI. */
   // workers: process.env.CI ? 1 : undefined,
   workers: 1,
@@ -33,7 +34,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'https://zoom.us/',
+    // baseURL: 'https://zoom.us/',
 
     navigationTimeout: 60000, // Timeout for navigation-related actions
     actionTimeout: 30000,     // Timeout for actions like click, fill, etc.
@@ -41,19 +42,28 @@ export default defineConfig({
     trace: 'on',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
+    viewport: {width: 1470, height: 788},
+    storageState: `.auth/user.json`
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
+      name:"setup",
+      use: {
+        ...devices['Desktop Chrome']
+      },
+      testMatch: /global\.setup\.ts/
+    },
+    {
       name: 'chromium',
       use: { 
         ...devices['Desktop Chrome'],
-        viewport: {width: 1470, height: 788},
         launchOptions: {
           args: ["--start-fullscreen"]
         }
       },
+      dependencies: ['setup']
     },
 
     // {
