@@ -5,7 +5,9 @@ import { ScheduleMeetingPage } from "../pageobjects/schedule.page";
 let homePage: HomePage;
 let scheduleMeeting: ScheduleMeetingPage;
 
-test.beforeEach("", async ({page}) => {
+test.beforeEach("", async ({page, request}) => {
+    // let response = request.post("url", {data:{"name": "kumar", "age": 12}, headers:{"Accept": "Application/json"}})
+
     homePage = new HomePage(page);
     scheduleMeeting = new ScheduleMeetingPage(page);
     await page.goto('https://us05web.zoom.us/myhome');
