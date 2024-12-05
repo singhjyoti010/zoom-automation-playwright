@@ -24,7 +24,7 @@ export default defineConfig({
   // retries: process.env.CI ? 2 : 0,
   retries: 1,
   /* Opt out of parallel tests on CI. */
-  // workers: process.env.CI ? 1 : undefined,
+  // workers: process.env.CI ? 2 : undefined,
   workers: 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
@@ -60,11 +60,13 @@ export default defineConfig({
       name: 'chromium',
       use: { 
         ...devices['Desktop Chrome'],
+        headless: false,
         launchOptions: {
-          args: ["--start-fullscreen"]
+          args: ["--start-fullscreen"],
+          slowMo: 1000 // a 1000 milliseconds pause before each operation, useful for slow machine
         }
       },
-      dependencies: ['setup']
+      // dependencies: ['setup']
     },
 
     // {
