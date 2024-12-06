@@ -23,6 +23,10 @@ export class HomePage {
         return this.page.locator('[tracking-id="leftNavWebinarIS"]');
     }
 
+    get leftNavElEventsAndSessions() {
+        return this.page.locator('[tracking-id="leftNavEvent"]');
+    }
+
     get leftNavElementPersonalContacts() {
         return this.page.locator('[tracking-id="leftNavPersinalContact"]');
     }
@@ -40,7 +44,7 @@ export class HomePage {
     }
 
     get leftNavElementDocs() {
-        return this.page.locator('[tracking-id="leftNavDoc]');
+        return this.page.locator('[tracking-id="leftNavDoc"]');
     }
 
     get leftNavElementRecording() {
@@ -103,6 +107,11 @@ export class HomePage {
         await this.leftNavElementWebinars.click();
         await expect(this.leftNavElementWebinars).toHaveAttribute('aria-current');
     }
+
+    public async isActiveEventsAndSessions() {
+        await this.leftNavElEventsAndSessions.click();
+        await expect(this.leftNavElEventsAndSessions).toHaveAttribute('aria-current');
+    }
     
     public async isActivePersonalContacts() {
         await this.leftNavElementPersonalContacts.click();
@@ -154,6 +163,17 @@ export class HomePage {
         await this.leftNavElementReports.first().scrollIntoViewIfNeeded();
         await this.leftNavElementReports.first().click();
         await expect(this.leftNavElementReports.first()).toHaveAttribute('aria-current');
+    }
+
+    public async docNavigation(){
+        await this.leftNavElementDocs.first().scrollIntoViewIfNeeded();
+        const [newTab] = await Promise.all([
+            this.page.waitForEvent('popup'),
+            await this.leftNavElementDocs.first().click() 
+        ])
+        await newTab.waitForLoadState();
+        await expect(newTab.locator('//*[contains(text(), "My docs")]')).toBeVisible();
+        await newTab.close();
     }
 
     /******************************** right section methods ****************************************/
