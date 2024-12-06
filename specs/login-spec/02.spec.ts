@@ -23,7 +23,7 @@ test.describe("Zoom signin", () => {
     test('Empty email with non-empty password field', async ({ page }) => {
         await loginPage.emptyEmail(helperConstants.emptyFields, helperConstants.incorrectPassword);
     })
-    test.only('Incorrect email/password', async ({ page }) => {
+    test('Incorrect email/password', async ({ page }) => {
         await loginPage.incorrectEmail(helperConstants.incorrectEmail, password);
     })
 })
