@@ -63,7 +63,7 @@ export default defineConfig({
         headless: false,
         launchOptions: {
           args: ["--start-fullscreen"],
-          slowMo: 1000 // a 1000 milliseconds pause before each operation, useful for slow machine
+          // slowMo: 1000 // a 1000 milliseconds pause before each operation, useful for slow machine
         }
       },
       // dependencies: ['setup']
