@@ -6,7 +6,7 @@ const email = process.env.USER_EMAIL!;
 const password = process.env.USER_PASSWORD!;
 let loginPage: LoginPage;
 
-test.describe("Zoom signin", () => {
+test.describe("[Negative Test] Verify error details when user signs in with email/password-incorrect credentials", () => {
     test.beforeEach('test pre-requisites', async ({ page }) => {
         await page.context().clearCookies();
         loginPage = new LoginPage(page);
