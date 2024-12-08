@@ -265,7 +265,7 @@ export class HomePage {
         await this.leftNavAdminPlanManagement.click();
         await expect(this.leftNavAdminPlanManagement).toHaveAttribute('aria-current');
     }
-//*[contains(@class,"pro_detail_dialog")]'
+
     /******************************** main section methods ****************************************/
     async profileCardCheck() {
         await this.isActiveHome();
