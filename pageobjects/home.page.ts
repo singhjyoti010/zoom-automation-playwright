@@ -71,6 +71,67 @@ export class HomePage {
         return this.page.locator('[tracking-id="leftNavReports"]');
     }
 
+    get leftNavSections() {
+        return this.page.locator('//*[contains(@class,"side-nav-title")]');
+    }
+
+    get leftNavLinksHolder(){
+        return this.page.locator('.zm-sidenav-alert');
+    }
+
+    get leftNavLinks(){
+        return this.page.locator('.zm-sidenav-alert p a');
+    }
+
+    get leftNavAdminPlanManagement(){
+        return this.page.locator('//a[@tracking-id="leftNavUsers" and contains(text(),"Plan Management")]');
+    }
+
+    /******************************** mid section locators ****************************************/
+    get profileCard() {
+        return this.page.locator('div[type="PROFILE"]');
+    }
+
+    get profilePic() {
+        return this.page.locator('//*[contains(@class,"profile_picture")]');
+    }
+
+    get userName() {
+        return this.page.locator('//*[contains(@class,"profile_details")]/h3');
+    }
+
+    get currPlan() {
+        return this.page.locator('//*[contains(@class,"account-status")]');
+    }
+
+    get jobTitle() {
+        return this.page.locator('//*[contains(@class,"profile-job-title_value")]');
+    }
+
+    get managePlanBtn() {
+        return this.page.locator('//*[contains(@class,"profile-cta-inner")]/button');
+    }
+
+    get currentPlanDetails() {
+        return this.page.locator('//*[contains(@class,"plans_wrapper")]');
+    }
+
+    get viewPlanDetailsLink() {
+        return this.page.locator('//*[contains(text(),"View Plan")]/ancestor::a');
+    }
+
+    get planDetailsDialog() {
+        return this.page.locator('//*[contains(@class,"pro_detail_dialog")]');
+    }
+
+    get viewAllPlansLink() {
+        return this.page.locator('//*[contains(@class,"pro_detail_footer")]/button[contains(@class,"tertiary")]');
+    }
+
+    get upgradeNowLink() {
+        return this.page.locator('//*[contains(@class,"pro_detail_footer")]/button[contains(@class,"primary")]');
+    }
+
     /******************************** widget locators ****************************************/
     get scheduleWidget() {
         return this.page.locator('//*[contains(text(),"Schedule")]/ancestor::a');
@@ -174,6 +235,59 @@ export class HomePage {
         await newTab.waitForLoadState();
         await expect(newTab.locator('//*[contains(text(), "My docs")]')).toBeVisible();
         await newTab.close();
+    }
+
+    async leftRailSectionCount() {
+        await this.isActiveHome();
+        await this.leftNavSections.first().isVisible();
+        let elements = this.leftNavSections;
+        let textArr = ["PERSONAL","ADMIN"]
+        await expect(elements).toHaveCount(2);
+        for(let i = 0; i < await elements.count(); i++ ) {
+            const elText = await elements.nth(i).innerText();
+            await expect(elText).toBe(textArr[i])
+        }
+    }
+
+    async leftRailLinksCount() {
+        await this.isActiveHome();
+        await this.leftNavLinksHolder.isVisible();
+        await expect(this.leftNavLinks).toHaveCount(3);
+        let elements = await this.leftNavLinks;
+        let arr=["Zoom Learning Center","Video Tutorials","Knowledge Base"];
+        for(let i = 0; i <await elements.count(); i++){
+            await expect(await elements.nth(i).innerText()).toBe(arr[i]);
+        }
+    }
+
+    async isActivePlanManagement(){
+        await this.leftNavAdminPlanManagement.scrollIntoViewIfNeeded();
+        await this.leftNavAdminPlanManagement.click();
+        await expect(this.leftNavAdminPlanManagement).toHaveAttribute('aria-current');
+    }
+//*[contains(@class,"pro_detail_dialog")]'
+    /******************************** main section methods ****************************************/
+    async profileCardCheck() {
+        await this.isActiveHome();
+        await expect(this.profileCard).toBeVisible();
+        await this.profilePic.isVisible();
+        await this.userName.isVisible();
+        await this.currPlan.isVisible();
+        await this.jobTitle.isVisible();
+        await this.managePlanBtn.isVisible();
+        await this.currentPlanDetails.isVisible();
+    }
+
+    async clickManagePlans() {
+        await this.managePlanBtn.click();
+        await this.isActivePlanManagement();
+    }
+
+    async clickViewPlanDetails() {
+        await this.viewPlanDetailsLink.click();
+        await expect(this.planDetailsDialog).toBeVisible();
+        await expect(this.viewAllPlansLink).toBeVisible();
+        await expect(this.upgradeNowLink).toBeVisible();
     }
 
     /******************************** right section methods ****************************************/
