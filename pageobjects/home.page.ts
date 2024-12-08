@@ -290,6 +290,15 @@ export class HomePage {
         await expect(this.upgradeNowLink).toBeVisible();
     }
 
+    async activityCardCheck() {
+        await this.isActiveHome();
+        await this.page.locator('div[type="ACTIVITY"]').isVisible();
+        await expect(this.page.$$('//div[@type="ACTIVITY"]//section/div/section')).toHaveLength(3);
+        let attr = await (await this.page.locator('//div[contains(@id,"trigger")]').first()).getAttribute("aria-expanded");
+        await this.page.locator('//div[contains(@id,"trigger")]').first().click();
+        expect(await (await this.page.locator('//div[contains(@id,"trigger")]').first()).getAttribute("aria-expanded")).not.toBe(attr);
+    }
+
     /******************************** right section methods ****************************************/
     public async clickSchduleWidget() {
         await (await this.scheduleWidget).click();
