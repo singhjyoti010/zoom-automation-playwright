@@ -17,12 +17,15 @@ test.describe("[Negative Test] Verify error details when user signs in with emai
         await loginPage.checkIncorrectEmailFormat(helperConstants.incorrectEmailFormat, helperConstants.emptyFields);
         await loginPage.emptyPassword(helperConstants.incorrectEmailFormat, helperConstants.emptyFields);
     })
+
     test('Enter incorrect email format with non-empty password field', async ({ page }) => {
         await loginPage.checkIncorrectEmailFormat(helperConstants.incorrectEmailFormat, helperConstants.emptyFields);
     })
+
     test('Empty email with non-empty password field', async ({ page }) => {
         await loginPage.emptyEmail(helperConstants.emptyFields, helperConstants.incorrectPassword);
     })
+    
     test('Incorrect email/password', async ({ page }) => {
         await loginPage.incorrectEmail(helperConstants.incorrectEmail, password);
     })
