@@ -299,6 +299,15 @@ export class HomePage {
         expect(await (await this.page.locator('//div[contains(@id,"trigger")]').first()).getAttribute("aria-expanded")).not.toBe(attr);
     }
 
+    async discoverProducts() {
+        await this.isActiveHome();
+        await this.page.locator('[type="UPSELL"]').isVisible();
+        await expect(this.page.locator('//*[contains(@type,"UPSELL")]//*[contains(@class,"card-container")]')).toHaveCount(3);
+        await expect(this.page.locator('//*[contains(@type,"UPSELL")]//*[contains(@class,"link_container")]/a')).toBeVisible();
+        await this.page.locator('//*[contains(@type,"UPSELL")]//*[contains(@class,"link_container")]/a').click();
+        await expect(this.page.locator('//*[contains(@type,"UPSELL")]//*[contains(@class,"card-container")]')).toHaveCount(4);
+    }
+
     /******************************** right section methods ****************************************/
     public async clickSchduleWidget() {
         await (await this.scheduleWidget).click();
