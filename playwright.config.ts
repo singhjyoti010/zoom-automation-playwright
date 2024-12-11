@@ -15,7 +15,8 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
 export default defineConfig({
   // globalSetup: path.resolve('specs/global.setup.ts'),
   timeout: 60000,
-  testDir: './specs',
+  testDir: './specs/',
+  // testMatch: ['**/*.spec.ts'],
   /* Run tests in files in parallel */
   fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -66,7 +67,7 @@ export default defineConfig({
           // slowMo: 1000 // a 1000 milliseconds pause before each operation, useful for slow machine
         }
       },
-      // dependencies: ['setup']
+      dependencies: ['setup']
     },
 
     // {
