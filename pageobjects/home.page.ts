@@ -299,6 +299,12 @@ export class HomePage {
         expect(await (await this.page.locator('//div[contains(@id,"trigger")]').first()).getAttribute("aria-expanded")).not.toBe(attr);
     }
 
+    async activityCardDefaultView() {
+        await this.isActiveHome();
+        await this.page.locator('//*[contains(text(),"Visit Docs")]/ancestor::a').isVisible();
+        await this.page.locator('//*[contains(@id,"region-ACTIVITY")]//button[contains(@class,"primary")]').isVisible();
+    }
+
     async discoverProducts() {
         await this.isActiveHome();
         await this.page.locator('[type="UPSELL"]').isVisible();
