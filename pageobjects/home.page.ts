@@ -132,6 +132,18 @@ export class HomePage {
         return this.page.locator('//*[contains(@class,"pro_detail_footer")]/button[contains(@class,"primary")]');
     }
 
+    get ActivityCard() {
+        return this.page.locator('div[type="ACTIVITY"]');
+    }
+
+    get ActivityCardSections () {
+        return this.page.$$('//div[@type="ACTIVITY"]//section/div/section');
+    }
+
+    get ActivityCardSectionToggle(){
+        return this.page.locator('//div[contains(@id,"trigger")]');
+    }
+
     /******************************** widget locators ****************************************/
     get scheduleWidget() {
         return this.page.locator('//*[contains(text(),"Schedule")]/ancestor::a');
@@ -292,11 +304,11 @@ export class HomePage {
 
     async activityCardCheck() {
         await this.isActiveHome();
-        await this.page.locator('div[type="ACTIVITY"]').isVisible();
-        await expect(this.page.$$('//div[@type="ACTIVITY"]//section/div/section')).toHaveLength(3);
-        let attr = await (await this.page.locator('//div[contains(@id,"trigger")]').first()).getAttribute("aria-expanded");
-        await this.page.locator('//div[contains(@id,"trigger")]').first().click();
-        expect(await (await this.page.locator('//div[contains(@id,"trigger")]').first()).getAttribute("aria-expanded")).not.toBe(attr);
+        await this.ActivityCard.isVisible();
+        await expect(this.ActivityCardSections).toHaveLength(3);
+        let attr = await (await this.ActivityCardSectionToggle.first()).getAttribute("aria-expanded");
+        await this.ActivityCardSectionToggle.first().click();
+        expect(await (await this.ActivityCardSectionToggle.first()).getAttribute("aria-expanded")).not.toBe(attr);
     }
 
     async activityCardDefaultView() {
