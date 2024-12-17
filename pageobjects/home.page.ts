@@ -152,6 +152,17 @@ export class HomePage {
         return this.page.locator('//*[contains(@id,"region-ACTIVITY")]//button[contains(@class,"primary")]');
     }
 
+    get productsCard() {
+        return this.page.locator('[type="UPSELL"]');
+    }
+    get productsCardSections() {
+        return this.page.locator('//*[contains(@type,"UPSELL")]//*[contains(@class,"card-container")]');
+    }
+
+    get viewMoreProductsLink() {
+        return this.page.locator('//*[contains(@type,"UPSELL")]//*[contains(@class,"link_container")]/a');
+    }
+
     /******************************** widget locators ****************************************/
     get scheduleWidget() {
         return this.page.locator('//*[contains(text(),"Schedule")]/ancestor::a');
@@ -327,11 +338,11 @@ export class HomePage {
 
     async discoverProducts() {
         await this.isActiveHome();
-        await this.page.locator('[type="UPSELL"]').isVisible();
-        await expect(this.page.locator('//*[contains(@type,"UPSELL")]//*[contains(@class,"card-container")]')).toHaveCount(3);
-        await expect(this.page.locator('//*[contains(@type,"UPSELL")]//*[contains(@class,"link_container")]/a')).toBeVisible();
-        await this.page.locator('//*[contains(@type,"UPSELL")]//*[contains(@class,"link_container")]/a').click();
-        await expect(this.page.locator('//*[contains(@type,"UPSELL")]//*[contains(@class,"card-container")]')).toHaveCount(4);
+        await this.productsCard.isVisible();
+        await expect(this.productsCardSections).toHaveCount(3);
+        await expect(this.viewMoreProductsLink).toBeVisible();
+        await this.viewMoreProductsLink.click();
+        await expect(this.productsCardSections).toHaveCount(4);
     }
 
     /******************************** right section methods ****************************************/
