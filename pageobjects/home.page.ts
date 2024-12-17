@@ -144,6 +144,14 @@ export class HomePage {
         return this.page.locator('//div[contains(@id,"trigger")]');
     }
 
+    get visitDocsInActivityCard () {
+        return this.page.locator('//*[contains(text(),"Visit Docs")]/ancestor::a');
+    }
+
+    get createBtnActivityCard() {
+        return this.page.locator('//*[contains(@id,"region-ACTIVITY")]//button[contains(@class,"primary")]');
+    }
+
     /******************************** widget locators ****************************************/
     get scheduleWidget() {
         return this.page.locator('//*[contains(text(),"Schedule")]/ancestor::a');
@@ -313,8 +321,8 @@ export class HomePage {
 
     async activityCardDefaultView() {
         await this.isActiveHome();
-        await this.page.locator('//*[contains(text(),"Visit Docs")]/ancestor::a').isVisible();
-        await this.page.locator('//*[contains(@id,"region-ACTIVITY")]//button[contains(@class,"primary")]').isVisible();
+        await this.visitDocsInActivityCard.isVisible();
+        await this.createBtnActivityCard.isVisible();
     }
 
     async discoverProducts() {
