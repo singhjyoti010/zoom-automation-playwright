@@ -44,7 +44,7 @@ export default defineConfig({
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
     viewport: {width: 1470, height: 788},
-    storageState: `.auth/user.json`
+    //storageState: `.auth/user.json`
   },
 
   /* Configure projects for major browsers */
@@ -65,7 +65,8 @@ export default defineConfig({
         launchOptions: {
           args: ["--start-fullscreen"],
           // slowMo: 1000 // a 1000 milliseconds pause before each operation, useful for slow machine
-        }
+        },
+        storageState: `.auth/user.json`
       },
       dependencies: ['setup']
     },
