@@ -10,5 +10,5 @@ setup('login setup', async ({page }) => {
     console.log('logging in...');
     loginPage = new LoginPage(page);
     await loginPage.login(email, password);
-    await page.context().storageState({ path: ".auth/user.json" })
+    await page.context().storageState({ path: `.auth/${process.env.USER_AUTH}` })
 });

@@ -66,7 +66,7 @@ export default defineConfig({
           args: ["--start-fullscreen"],
           // slowMo: 1000 // a 1000 milliseconds pause before each operation, useful for slow machine
         },
-        storageState: `.auth/user.json`
+        storageState: `.auth/${process.env.USER_AUTH}`
       },
       dependencies: ['setup']
     },
