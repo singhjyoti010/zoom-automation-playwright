@@ -6,3 +6,6 @@ jobs:
     runs-on: windows-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - name: check out source code
+        uses: actions/checkout@v4.2.2
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
