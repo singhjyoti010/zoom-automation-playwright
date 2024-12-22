@@ -1,6 +1,6 @@
 name: Zoom Automation Playwright
 
-on: [push, pull_request]
+on: [push, pull_request, workflow_dispatch]
 jobs:
   build-and-test:
     runs-on: windows-latest
