@@ -9,6 +9,8 @@ jobs:
       - name: check out source code
         uses: actions/checkout@v4.2.2
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@v1.7.2
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
         with:
