@@ -20,7 +20,12 @@ jobs:
       # Step 4: Install Playwright browsers
       - name: Install Playwright browsers
         run: npx playwright install
-      # Step 5: Run test
+      # Step 5: Run Playwright test with enviornment secrets
       - name: run test
         run: npx playwright test --headed
+        env:
+          USER_EMAIL: ${{secrets.USER_EMAIL}}
+          USER_PASSWORD: ${{secrets.USER_PASSWORD}}
+          USER_PERSONAL_MEETING_ID: ${{secrets.USER_PERSONAL_MEETING_ID}}
+          USER_AUTH: ${{secrets.USER_AUTH}}
             
