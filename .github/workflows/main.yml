@@ -17,6 +17,9 @@ jobs:
           node-version: '20.x'
       - name: Install dependencies
         run: npm install
+      # Step 4: Install Playwright browsers
+      - name: Install Playwright browsers
+        run: npx playwright install
       - name: run test
         run: npx playwright test
             
