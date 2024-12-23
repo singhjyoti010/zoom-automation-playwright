@@ -16,10 +16,10 @@ jobs:
           node-version: '20.x'
       # Step 3: Install dependencies using npm i
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       # Step 4: Install Playwright browsers
       - name: Install Playwright browsers
-        run: npx playwright install-deps
+        run: npx playwright install --with-deps
       # Step 5: Run Playwright test with enviornment secrets
       - name: run test
         run: npx playwright test --headed
