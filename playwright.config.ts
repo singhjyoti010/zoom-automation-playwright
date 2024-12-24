@@ -69,7 +69,7 @@ export default defineConfig({
         },
         storageState: `.auth/${process.env.USER_AUTH}`
       },
-      // dependencies: ['setup']
+      dependencies: ['setup']
     },
 
     // {
