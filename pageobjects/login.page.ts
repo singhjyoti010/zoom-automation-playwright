@@ -71,7 +71,7 @@ export class LoginPage {
     public async enterEmailPass(email: string, password: string) {
         //fill email field
         await this.emailInputField.clear();
-        await this.page.locator(this.emailInputFld).type(email);
+        await this.emailInputField.type(email);
         // await this.emailInputField.type(email);
         //fill password field
         await this.passwordInputField.clear();
