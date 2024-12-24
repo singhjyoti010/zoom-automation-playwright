@@ -14,7 +14,7 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
  */
 export default defineConfig({
   // globalSetup: path.resolve('specs/global.setup.ts'),
-  globalTimeout: 12*1000,
+  globalTimeout: 12*10000,
   timeout: 60000,
   testDir: './specs/',
   // testMatch: ['**/*.spec.ts'],
