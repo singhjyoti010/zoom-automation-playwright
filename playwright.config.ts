@@ -14,6 +14,7 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
  */
 export default defineConfig({
   // globalSetup: path.resolve('specs/global.setup.ts'),
+  globalTimeout: 12*1000,
   timeout: 60000,
   testDir: './specs/',
   // testMatch: ['**/*.spec.ts'],
@@ -68,7 +69,7 @@ export default defineConfig({
         },
         storageState: `.auth/${process.env.USER_AUTH}`
       },
-      dependencies: ['setup']
+      // dependencies: ['setup']
     },
 
     // {
